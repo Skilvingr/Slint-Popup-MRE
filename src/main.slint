@@ -20,13 +20,37 @@ export component App inherits Window {
         width: root.width / 2;
         height: root.height / 2;
 
+        inner_context_menu := ContextMenuArea {
+            Menu {
+                MenuItem {
+                    title: "Open popup";
+                    activated => {
+                        context_menu.close();
+                        popup.show();
+                    }
+                }
+            }
+        }
+
         Rectangle {
             background: Colors.red;
-            Button {
-                text: "Open second popup";
-                clicked => {
-                    //popup.close();
-                    popup2.show();
+            VerticalBox {
+                alignment: LayoutAlignment.center;
+
+                Button {
+                    text: "Open inner context menu";
+                    clicked => {
+                        inner_context_menu.show({ x: 0, y: 0 });
+                    }
+                }
+
+                Button {
+                    text: "Open second popup";
+                    clicked => {
+                        // The following line must be uncommented to show the second popup
+                        //popup.close();
+                        popup2.show();
+                    }
                 }
             }
         }
@@ -37,6 +61,7 @@ export component App inherits Window {
             MenuItem {
                 title: "Open popup";
                 activated => {
+                    // The following line must be uncommented to show the first popup
                     //context_menu.close();
                     popup.show();
                 }
